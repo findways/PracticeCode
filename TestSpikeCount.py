@@ -29,107 +29,111 @@ splitInterval = np.linspace(0,duration, n+1)    #Generate a interval array to fi
 # print ('splitInterval: ', splitInterval)
 
 ##Trying different lengths over which to iterate in for loop
-length_splitInt = len(splitInterval)
-# print ('length splitInterval: ', length_splitInt)
-length_time = len(time[0])
-# print ('length time: ',length_time)
-length = length_splitInt + ((length_time)-2)
-# print ('length :', length)
+# length_splitInt = len(splitInterval)
+# # print ('length splitInterval: ', length_splitInt)
+# length_time = len(time[0])
+# # print ('length time: ',length_time)
+# length = length_splitInt + ((length_time)-2)
+# # print ('length :', length)
 
 
-h=0
-i=0     #inex for for subinterval (length of splitInterval)
+row=0
+col=0     #inex for for subinterval (length of splitInterval)
 j=0     #index for splitInterval array.
 k = 0   #index for new matrix that will store the grouped values from the split time array
 n = 0   #row tracker
 counter = 0
-SpikeCount = []
+SpikeCount = [[] for col in range(len(time))]
 
-# print ('time element: ', time[3,0])
-# print ('length of row: ', len(time))
-# print ('len(time[0]): ', len(time[0]))
-leng = len(time)
-# print ('leng: ', leng)
-# print ('len(time[h:]): ', len(time[h:]))
 
-for h in range(leng+1):
-    print ('h: ', h)
-    # counter = 0
-    if h < (leng):
-        print ('len(time[h][]: ', leng)
-        for i in range(len(splitInterval) + len(time[h])-1):
-            print ('i: ', i)
-            if (i==0) and (time[h][i] == splitInterval[0]):
+
+for row in range(len(time)+1):
+    print ('row: ', row)
+    if row < (len(time)):
+        print ('len(time[row]: ', len(time))
+        for col in range(len(splitInterval) + len(time[row])-2):
+            print ('col: ', col)
+            # print('time[row][k]: ', time[row][k])
+            if (col==0) and (time[row][col] == splitInterval[0]):
                 counter += 1
-                i += 1
-                print('i if: ', i)
+                col += 1
+                print('col if: ', col)
                 print('should happen once')
-
+                print('SpikeCount: ', SpikeCount)
                 #Spot check
                 print('if counter: ', counter)
-                print('time element: ', time[h][k])
+                print('time element: ', time[row][k])
                 print('splitInt: ', splitInterval[j], splitInterval[j + 1])
                 print('if k: ', k)
-                print('len(time[:i]) - 1: ', len(time[i]) - 1)
-                if k < (len(time[h]) - 1):
+                print('len(time[:row]): ', len(time[row]))
+
+                if k < (len(time[row])):
                     k += 1
 
                     # Spot check
                     print('iff k: ', k)
                     print('iff counter: ', counter)
+                    print('SpikeCount: ', SpikeCount)
                 else:
                     j += 1
                     # Spot check
 
                     print('iff counter: ', counter)
-                    print(SpikeCount)
+                    print('SpikeCount: ', SpikeCount)
                     print('iff j: ', j)
 
-            elif (time[h][k] > splitInterval[j]) and (time[h][k] <= splitInterval[j + 1]):
+            elif (k<= len(time[row])) and (time[row][k] > splitInterval[j]) and (time[row][k] <= splitInterval[j + 1]):
                 counter += 1
-                i += 1
+                col += 1
 
                 #Spot check
                 print('elif counter: ', counter)
-                print('time element: ', time[h][k])
+                print('SpikeCount: ', SpikeCount)
+                print('time element: ', time[row][k])
                 print('splitInt: ', splitInterval[j], splitInterval[j + 1])
-                print('i: ', i)
+                print('col: ', col)
                 print('elif k: ', k)
+                print ('len(time[row]): ', len(time[row]))
+                print('row: ', row)
 
-                if k < (len(time[h])-1):
+                if k < (len(time[row])):
                     k += 1
 
                     # Spot check
                     print('elifif k: ', k)
                     print('elifif counter: ', counter)
-                    print('elifif i: ', i)
+                    print('elifif col: ', col)
                 else:
                     j += 1
                     # Spot check
-                    SpikeCount.append(counter)
+                    print ('row: ', row)
+                    SpikeCount[row].append(counter)
                     print('elseif counter: ', counter)
-                    print(SpikeCount)
+                    print('SpikeCount: ', SpikeCount)
                     print('elseif j: ', j)
 
 
             else:
-                SpikeCount.append(counter)
+                SpikeCount[row].append(counter)
                 counter = 0
                 j += 1
-                i+=1
+                col+=1
 
                 #Spot Check
                 print('else counter: ', counter)
-                print(SpikeCount)
-                print('time element: ', time[h][k])
+                print('SpikeCount: ', SpikeCount)
+                print('time element: ', time[row][k])
                 # print('splitInt: ', splitInterval[j], splitInterval[j + 1])
                 print('else j: ', j)
-                print('else i: ', i)
+                print('else col: ', col)
                 print ('else k: ', k)
-                print('else h: ', h)
-                h+=1
+                print('else row: ', row)
+
+
+
 #
     else:
+        row += 1
         break
 
 
