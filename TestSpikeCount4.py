@@ -114,19 +114,32 @@ for row in range(len(time)+1):
                 print('counter: ', counter)
                 print('SpikeCount: ', SpikeCount)
                 print('j: ', j)
+                print('k: ', k)
                 if (k==len(time[row])):
                     print ('else2if')
-                    if (j<len(splitInterval)):
+                    #if j is less than the last time element
+                    if (j<len(splitInterval)-1):
                         print('else2ifif')
                         counter = 0
-                        SpikeCount[row].append(counter)
+                        # SpikeCount[row].append(counter)
                         print('counter: ', counter)
                         print('SpikeCount: ', SpikeCount)
                         print('j: ', j)
                         print('col: ', col)
                         print('k: ', k)
                         print('row: ', row)
-                    else:
+
+                        # if this is the last interval
+                        if (j == len(splitInterval)-2):
+                            print('else2ififif')
+                            j = 0
+                            k = 0
+                            counter = 0
+                            SpikeCount[row].append(counter)
+                            print('break')
+                            break
+
+                    else: # j is the last time element
                         print ('else2ifelse')
                         j = 0
                         k = 0
@@ -137,6 +150,7 @@ for row in range(len(time)+1):
                         print('col: ', col)
                         print('k: ', k)
                         print('row: ', row)
+
                 elif (j == (len(splitInterval)-1)):
                     print ('else2elif')
                     j = 0
@@ -154,8 +168,8 @@ for row in range(len(time)+1):
                     print('else2else')
                     # j += 1
                     counter = 0
-                    print('time element: ', time[row][k])
-                    print('splitInt: ', splitInterval[j], splitInterval[j + 1])
+                    # print('time element: ', time[row][k])
+                    # print('splitInt: ', splitInterval[j], splitInterval[j + 1])
                     print('counter: ', counter)
                     print('j: ', j)
                     print('col: ', col)
